@@ -1,3 +1,4 @@
+/* randomize answers to the questions */
 export const shuffleArray=(array: any[])=>{
-  [...array].sort(()=>(Math.random()-0.5));
+  return [...array].sort(()=>(Math.random()-0.5)); //quick fix for randomizer function 
 }
