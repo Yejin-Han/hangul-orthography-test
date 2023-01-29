@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/hangul-orthography-test/static/js/main.9a88628d.js",
+    "static/media/bg.jpg": "/hangul-orthography-test/static/media/bg.73a8ce851f3c391b312a.jpg",
+    "index.html": "/hangul-orthography-test/index.html",
+    "main.9a88628d.js.map": "/hangul-orthography-test/static/js/main.9a88628d.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.9a88628d.js"
+  ]
+}
