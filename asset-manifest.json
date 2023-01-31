@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.js": "/hangul-orthography-test/static/js/main.9a88628d.js",
-    "static/media/bg.jpg": "/hangul-orthography-test/static/media/bg.73a8ce851f3c391b312a.jpg",
+    "main.js": "/hangul-orthography-test/static/js/main.1434b49c.js",
+    "static/media/bg1.png": "/hangul-orthography-test/static/media/bg1.f2f3a6a0871b4fcc2a92.png",
+    "static/media/bg2.png": "/hangul-orthography-test/static/media/bg2.2da5d62ab28838507047.png",
     "index.html": "/hangul-orthography-test/index.html",
-    "main.9a88628d.js.map": "/hangul-orthography-test/static/js/main.9a88628d.js.map"
+    "main.1434b49c.js.map": "/hangul-orthography-test/static/js/main.1434b49c.js.map"
   },
   "entrypoints": [
-    "static/js/main.9a88628d.js"
+    "static/js/main.1434b49c.js"
   ]
 }

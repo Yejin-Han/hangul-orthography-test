@@ -1,0 +1,52 @@
+[
+	{
+		"question": "아주 <span></span> 친구를 만났다.",
+		"correct_answer": "오랜만에",
+		"incorrect_answer": "오랫만에"
+	},
+	{
+		"question": "한국어가 <span></span> 말을 더듬더듬하였다.",
+		"correct_answer": "서툴러서",
+		"incorrect_answer": "서툴어서"
+	},
+	{
+		"question": "저 <span></span>가 제일 사납다.",
+		"correct_answer": "수사자",
+		"incorrect_answer": "숫사자"
+	},
+	{
+		"question": "이 음식은 내 입맛을 <span></span>.",
+		"correct_answer": "돋운다",
+		"incorrect_answer": "돋군다"
+	},
+	{
+		"question": "그 영화가 너무 무서워서 <span></span>.",
+		"correct_answer": "기절할 뻔했어",
+		"incorrect_answer": "기절할 뻔 했어"
+	},
+	{
+		"question": "이 물건 <span></span>?",
+		"correct_answer": "얼마예요",
+		"incorrect_answer": "얼마에요"
+	},
+	{
+		"question": "<span></span>의 수축으로 인해 딸꾹질이 나오는 것이다.",
+		"correct_answer": "횡격막",
+		"incorrect_answer": "횡경막"
+	},
+	{
+		"question": "지갑 그렇게 들고 다니면 잃어버리기 <span></span>.",
+		"correct_answer": "십상이다",
+		"incorrect_answer": "쉽상이다"
+	},
+	{
+		"question": "민지야, 가스 밸브 <span></span>?",
+		"correct_answer": "잠갔어",
+		"incorrect_answer": "잠궜어"
+	},
+	{
+		"question": "<span></span> 사람 잡지마.",
+		"correct_answer": "애먼",
+		"incorrect_answer": "엄한"
+	}
+]
