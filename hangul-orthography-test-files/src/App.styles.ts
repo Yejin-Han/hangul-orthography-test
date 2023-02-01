@@ -21,15 +21,15 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
-  html, body{ width: 100%; height: 100%; }
-  body, h1, p, div, button{
+  html, body{ width: 100%; }
+  body, h1, h3, p, div, ol, li, button{
     margin: 0; padding: 0;
   }
   body{
-    overflow: hidden;
     position: relative;
     font-family: 'GangwonEdu_OTFBoldA', '맑은 고딕', sans-serif;
     color: #222;
+    background: #f4f6f7;
   }
   button{
     border: 0;
@@ -50,13 +50,12 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Bg = styled.div`
-  width: 100%; height: 100%;
+  width: 100%; height: 100vh;
   position: absolute; left: 0; top: 0;
-  background: #f4f6f7;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   .bg{
-    position: absolute;
+    position: fixed;
     opacity: 0.8;
     transition: all .4s;
     @media screen and (min-width: 768px){

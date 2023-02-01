@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     border-bottom: 2px solid #222;
   }
   @media screen and (min-width: 1280px){
-    width: 50%;
+    width: 80%;
     .number{ font-size: 2.3rem; }
     .number>span{ font-size: 1.6rem; }
     .realQ{ font-size: 3rem; }
@@ -59,7 +59,7 @@ export const ButtonWrapper=styled.div<ButtonWrapperProps>`
     color: #fff;
     text-shadow: 0px 1px 0px rgba(0,0,0,0.25);
     @media screen and (min-width: 1280px){
-      width: 85%;
+      width: 60%;
       font-size: 2.5rem;
     }
     @media screen and (max-width: 1279px) and (min-width: 768px){

@@ -14,11 +14,15 @@ const shuffleArray = (array: string[]) => {
 }
 
 export const callQuestions = async(amount: number) => {
-  const Data = await axios.get('./data/data.json');
-  return Data.data.map((question: Question) => (
-    {
-      ...question,
-      answers: shuffleArray([question.correct_answer, question.incorrect_answer]),
-    }
-  ));
+  try{
+    const Data = await axios.get('./data/data.json');
+    return Data.data.map((question: Question) => (
+      {
+        ...question,
+        answers: shuffleArray([question.correct_answer, question.incorrect_answer]),
+      }
+    ));
+  } catch(err){
+    console.log(err);
+  }
 };

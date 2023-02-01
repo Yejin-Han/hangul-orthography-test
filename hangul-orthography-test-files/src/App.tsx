@@ -21,12 +21,16 @@ const TOTAL_QUESTIONS = 10;
 - userAnswers를 하나씩 나열한다
 - userAnswers가 false이면 incorrect이므로 위에 취소선 그어주고 해당하는 correct answer을 옆에 써준다.
 3. 다음으로버튼 같은거 hover letter animation!
+
+** new problem
+build를 upload하니까 axios 작동이 안된다..!!!
 */
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [num, setNum] = useState(0);
+  const [clickedAnswer, setClickedAnswer] = useState<AnswerObject[]>([]);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
@@ -35,16 +39,13 @@ const App = () => {
   const [showFinishBtn, setShowFinishBtn] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [replay, setReplay] = useState(false);
-  const [isCorrectArr, setIsCorrectArr] = useState<boolean[]>([]);
-  let clickedAnswer: AnswerObject[] = [];
-  /* userAnswers set 하는거에서 문제가 있음
-  결과 페이지에서 틀린거 안틀린거 보여주려면 어떻게 해야할지 고민하기 */
 
   const callData = async() => {
     setLoading(true);
     const newQuestions = await callQuestions(TOTAL_QUESTIONS);
     setQuestions(newQuestions);
     setNum(0);
+    setClickedAnswer([]);
     setUserAnswers([]);
     setScore(0);
     setGameOver(false);
@@ -62,9 +63,9 @@ const App = () => {
       const answer = e.currentTarget.value;
       const correct = questions[num].correct_answer === answer;
       if(correct){
-        setIsCorrect(true);
+        setIsCorrect(prev => !prev);
       } else{
-        setIsCorrect(false);
+        setIsCorrect(prev => prev);
       }
       if((num === TOTAL_QUESTIONS - 1) && correct) setScore(prev => prev+10);
       const answerObject = {
@@ -73,28 +74,24 @@ const App = () => {
         correct,
         correctAnswer: questions[num].correct_answer
       }
-      clickedAnswer = [...clickedAnswer, answerObject];
-      console.log(clickedAnswer);
+      setClickedAnswer(prev => [...prev, answerObject]);
     }
   }
 
   const nextQuestion = () => {
     setUserAnswers(prev => [...prev, clickedAnswer[clickedAnswer.length - 1]]);
+    console.log(userAnswers);
     const nextQuestion=num+1;
     if(nextQuestion === TOTAL_QUESTIONS){
       setGameOver(true);
-      setIsCorrectArr(prev => [...prev, isCorrect]);
     } else{
       setNum(nextQuestion);
     }
-    setIsCorrectArr(prev => [...prev, isCorrect]);
     if(isCorrect) setScore(prev => prev+10);
     if(nextQuestion === TOTAL_QUESTIONS - 1) setShowFinishBtn(true);
-    console.log(isCorrectArr);
-    console.log(userAnswers);
     setIsCorrect(false);
     setClicked(false);
-    clickedAnswer=[];
+    setClickedAnswer([]);
   }
 
   const handlePlayAgain = () => {
@@ -106,7 +103,6 @@ const App = () => {
     setShowFinishBtn(false);
     setShowResult(false);
     setReplay(true);
-    setIsCorrectArr([]);
   }
 
   return (
@@ -116,7 +112,8 @@ const App = () => {
         <div className="bg bg1"></div>
         <div className="bg bg2"></div>
         <Wrapper>
-          {showResult && !replay ? <ResultPage finalScore={score} callback={handlePlayAgain} /> : (
+          {showResult && !replay ?
+            <ResultPage finalScore={score} callback={handlePlayAgain} answerList={userAnswers} /> : (
             <>
               {!showFinishBtn && (gameOver || (userAnswers.length === TOTAL_QUESTIONS)) ? (
                 <>
