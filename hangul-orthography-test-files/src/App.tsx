@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import QuestionCard from './components/QuestionCard';
 import ResultPage from './components/ResultPage';
 import { callQuestions, QuestionState  } from './Data';
-import { GlobalStyle, Bg, Wrapper } from './App.styles';
+import { GlobalStyle, Bg, Wrapper, MainButton } from './App.styles';
 
 export interface AnswerObject{
   question: string;
@@ -11,20 +11,6 @@ export interface AnswerObject{
   correctAnswer: string;
 }
 const TOTAL_QUESTIONS = 10;
-
-/* 1. setUserAnswers 수정, userAnswers 잘 들어오는지
-* answerObject를 추가하는 것에서 correct와 answer, correctanswer을 활용할 수 있지 않을까?
-그럼 useState 남발하지 않고 해결될 것 같은데
--> 이후 클릭했을 때 opacity 바뀌는지 확인
-2. finalPage 전면 수정
-- next로 넘겨준 값이 correctanswer인지 아닌지 체크하는 배열을 뽑고
-- userAnswers를 하나씩 나열한다
-- userAnswers가 false이면 incorrect이므로 위에 취소선 그어주고 해당하는 correct answer을 옆에 써준다.
-3. 다음으로버튼 같은거 hover letter animation!
-
-** new problem
-build를 upload하니까 axios 작동이 안된다..!!!
-*/
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -63,11 +49,10 @@ const App = () => {
       const answer = e.currentTarget.value;
       const correct = questions[num].correct_answer === answer;
       if(correct){
-        setIsCorrect(prev => !prev);
+        setIsCorrect(prev => true);
       } else{
-        setIsCorrect(prev => prev);
+        setIsCorrect(prev => false);
       }
-      if((num === TOTAL_QUESTIONS - 1) && correct) setScore(prev => prev+10);
       const answerObject = {
         question: questions[num].question,
         answer,
@@ -80,7 +65,6 @@ const App = () => {
 
   const nextQuestion = () => {
     setUserAnswers(prev => [...prev, clickedAnswer[clickedAnswer.length - 1]]);
-    console.log(userAnswers);
     const nextQuestion=num+1;
     if(nextQuestion === TOTAL_QUESTIONS){
       setGameOver(true);
@@ -88,8 +72,7 @@ const App = () => {
       setNum(nextQuestion);
     }
     if(isCorrect) setScore(prev => prev+10);
-    if(nextQuestion === TOTAL_QUESTIONS - 1) setShowFinishBtn(true);
-    setIsCorrect(false);
+    if(nextQuestion === TOTAL_QUESTIONS - 1){ setShowFinishBtn(true); }
     setClicked(false);
     setClickedAnswer([]);
   }
@@ -119,7 +102,7 @@ const App = () => {
                 <>
                   <h1>맞춤법 시험</h1>
                   <p className="text">나의 한글 맞춤법 실력은 과연! 지금 바로 시험을 시작해보세요</p>
-                  <button className="start" onClick={callData}>시험시작</button>
+                  <MainButton className="start" onClick={callData}>시험시작</MainButton>
                 </>
               ) : null}
               {!loading && !gameOver && (
@@ -129,20 +112,24 @@ const App = () => {
                     totalQuestions={TOTAL_QUESTIONS}
                     question={questions[num].question}
                     answers={questions[num].answers}
+                    clickedAnswer={clickedAnswer ? clickedAnswer[clickedAnswer.length - 1] : undefined}
                     userAnswer={userAnswers ? userAnswers[num] : undefined}
                     callback={checkAnswer}
                   />
                 </>
               )}
               {!gameOver && !loading && clicked && num !== (TOTAL_QUESTIONS - 1) ? (
-                <button className="next" onClick={nextQuestion}>
+                <MainButton className="next" onClick={nextQuestion}>
                   <span>다</span><span>음</span><span>으</span><span>로</span>
-                </button>
+                </MainButton>
               ) : null}
               {!gameOver && !loading && clicked && showFinishBtn ? (
-                <button className="finish" onClick={()=>{setShowResult(true)}}>
+                <MainButton className="finish" onClick={()=>{
+                  nextQuestion();
+                  setShowResult(true);
+                }}>
                   <span>결과보기</span>
-                </button>
+                </MainButton>
               ) : null}
             </>
           )}

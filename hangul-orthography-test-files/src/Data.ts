@@ -15,7 +15,7 @@ const shuffleArray = (array: string[]) => {
 
 export const callQuestions = async(amount: number) => {
   try{
-    const Data = await axios.get('./data/data.json');
+    const Data = await axios.get('https://raw.githubusercontent.com/Yejin-Han/hangul-orthography-test/main/data/data.json');
     return Data.data.map((question: Question) => (
       {
         ...question,

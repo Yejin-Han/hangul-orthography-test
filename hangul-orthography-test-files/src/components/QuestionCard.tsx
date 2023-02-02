@@ -6,6 +6,7 @@ interface Props{
   question: string;
   answers: string[];
   callback: (e: React.MouseEvent<HTMLButtonElement>)=>void;
+  clickedAnswer: AnswerObject | undefined;
   userAnswer: AnswerObject | undefined;
   questionNum: number;
   totalQuestions: number;
@@ -15,6 +16,7 @@ const QuestionCard = ({
   question,
   answers,
   callback,
+  clickedAnswer,
   userAnswer,
   questionNum,
   totalQuestions,
@@ -26,10 +28,12 @@ const QuestionCard = ({
     <p className="realQ" dangerouslySetInnerHTML={{ __html: question }} />
     <div>
       {answers.map((answer,idx) => (
-        <ButtonWrapper key={idx} userClicked={userAnswer?.answer===answer}>
+        <ButtonWrapper key={idx} userClicked={clickedAnswer?.answer===answer}>
+          <>
           <button value={answer} onClick={callback}>
             <span dangerouslySetInnerHTML={{ __html: answer }}></span>
           </button>
+          </>
         </ButtonWrapper>
       ))}
     </div>

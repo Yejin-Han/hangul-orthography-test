@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useSpring, animated } from 'react-spring';
 import { AnswerObject } from '../App';
-import { Wrapper } from './ResultPage.styles';
+import { MainButton } from '../App.styles';
+import { Wrapper, MyAnswer } from './ResultPage.styles';
 
 interface Props{
   finalScore: number;
@@ -8,7 +10,12 @@ interface Props{
   answerList: AnswerObject[];
 }
 
+
 const ResultPage = ({finalScore, callback, answerList}: Props) => {
+  const count = useSpring({
+    from: { number: 0 },
+    to: {number: finalScore}
+  });
   const [ment, setMent] = useState('');
   const scoreCompare = () => {
     if(finalScore === 100){
@@ -18,14 +25,20 @@ const ResultPage = ({finalScore, callback, answerList}: Props) => {
     } else if(finalScore >= 40){
       setMent('오늘부터 나머지 공부!<span>가능성이 보여요! 나아질 수 있어요</span>');
     } else{
-      setMent('한국인... 맞나요?<span>한국인의 긍지를 지키기 위해! 다시 한 번 도전하세요</span>');
+      setMent('한국인... 맞나요?<span>한국인의 긍지를 지키기 위해 다시 한 번 도전하세요!</span>');
     }
   }
   useEffect(scoreCompare, []);
+
   return(
     <Wrapper>
       <p className="score_wrap">
-        <span>당신의 맞춤법 점수는?</span><span className="score"> <span>{finalScore}</span> 점</span>
+        <span>당신의 맞춤법 점수는? </span>
+        <span className="score">
+          <animated.span>
+            {count.number.to(val => Math.floor(val))}
+          </animated.span> 점
+        </span>
       </p>
       <div className="comment">
         <p dangerouslySetInnerHTML={{ __html: ment }}></p>
@@ -35,18 +48,18 @@ const ResultPage = ({finalScore, callback, answerList}: Props) => {
         <ol>
           {
             answerList.map((list, idx) => (
-              <li key={idx}>
+              <MyAnswer key={idx} isCorrect={list.correct}>
                 <span className="my_answer">
                   {list.answer}
                   <span className="del"></span>
                 </span>
                 <span className="correct_answer">{list.correctAnswer}</span>
-              </li>
+              </MyAnswer>
             ))
           }
         </ol>
       </div>
-      <button onClick={callback}>다시 풀기</button>
+      <MainButton className="replay" onClick={callback}>다시 풀기</MainButton>
     </Wrapper>
   );
 }

@@ -77,8 +77,35 @@ export const Bg = styled.div`
   }
   
 `
+export const MainButton = styled.button`
+  display: block;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+  font-family: 'BMJUA', '맑은 고딕', sans-serif;
+  letter-spacing: 2px; color: #fff;
+  transition: all .4s;
+  line-height: 5rem;
+  border-radius: 2.5rem;
+  background-image: linear-gradient(126deg, #FC5C7D, #6A82FB);
+  font-size: 2rem;
+  margin-top: 10rem;
+  :hover{ filter: brightness(90%); }
+  @media screen and (min-width: 1280px){
+    width: 30%;
+  }
+  @media screen and (max-width: 1279px) and (min-width: 768px){
+    width: 50%;
+  }
+  @media screen and (max-width: 767px){
+    width: 70%;
+  }
+`;
 
 export const Wrapper = styled.div`
+  @keyframes letter{
+    0%{ font-size: 1.6rem; }
+    50%{ font-size: 1.9rem; }
+    100%{ font-size: 1.6rem; }
+  }
   width: 80%;
   height: 70%;
   text-align: center;
@@ -92,47 +119,31 @@ export const Wrapper = styled.div`
     font-size: 1.6rem;
     margin-top: 2rem;
   }
-  .start, .next, .finish{ 
-    display: block;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
-    font-family: 'BMJUA', '맑은 고딕', sans-serif;
-    letter-spacing: 2px; color: #fff;
-    transition: all .4s;
-  }
-  .start, .finish{
-    width: 30%;
-    line-height: 5rem;
-    border-radius: 2.5rem;
-    background-image: linear-gradient(126deg, #FC5C7D, #6A82FB);
-    font-size: 2rem;
-    margin-top: 10rem;
-  }
-  .start:hover, .next:hover, .finish:hover{
-    filter: brightness(90%);
-  }
   .next{
     width: 25%;
+    height: 4rem;
     line-height: 4rem;
     border-radius: 2rem;
     background-image: linear-gradient(126deg, #6eafb4, #56ccff);
     font-size: 1.6rem;
     margin-top: 25rem;
     transition: all .4s;
+    :hover>span{ animation: letter 0.2s ease 0s 1 alternate both; }
+    :hover>span:nth-of-type(2){ animation-delay: 0.1s; }
+    :hover>span:nth-of-type(3){ animation-delay: 0.2s; }
+    :hover>span:nth-of-type(4){ animation-delay: 0.3s; }
   }
   .finish{ margin-top: 25rem; }
   @media screen and (min-width: 1280px){
     h1{ font-size: 140px; }
-    .start, .finish{ width: 30%; }
     .next{ width: 25%; }
   }
   @media screen and (max-width: 1279px) and (min-width: 768px){
     h1{ font-size: 110px; }
-    .start, .finish{ width: 50%; }
     .next{ width: 40%; }
   }
   @media screen and (max-width: 767px){
     h1{ font-size: 50px; }
-    .start, .finish{ width: 70%; }
     .next{ width: 60%; }
   }
 `;
